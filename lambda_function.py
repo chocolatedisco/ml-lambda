@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from face_classifier import face_detector
+from face_api import face_detector#, face_classifier
 import json
 import base64
 from PIL import Image
@@ -24,23 +24,7 @@ def lambda_handler(event, context):
         pilImg.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue())
         img_str = img_str.decode('utf-8')
-        name = face_classifier(img)
-        return json.dumps([img_str, name])
+        # name = face_classifier(img)
+        return json.dumps(img_str)
     else:
         return json.dumps(err)
-
-
-#    return json.dumps(annotations, cls = MyEncoder)
-
-
-# # numpyの型をdumpできるように変換するため
-# class MyEncoder(json.JSONEncoder):
-#    def default(self, obj):
-#        if isinstance(obj, np.integer):
-#            return int(obj)
-#        elif isinstance(obj, np.floating):
-#            return float(obj)
-#        elif isinstance(obj, np.ndarray):
-#            return obj.tolist()
-#        else:
-#            return super(MyEncoder, self).default(obj)

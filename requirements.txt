@@ -1,6 +1,4 @@
 opencv-python
-tensorflow
-Keras
 h5py
 numpy
 pillow
